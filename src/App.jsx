@@ -1,9 +1,12 @@
 import React from 'react'
+import Nav from './components/Nav'
+import Hero from './components/Hero'
 
 const App = () => {
   return (
     <div >
-      <p className='bg-amber-500'>Hy I am Vishal Kumar and I am from Bihar and i want to became fluent in English</p>
+    <Nav />
+    <Hero />
     </div>
   )
 }
