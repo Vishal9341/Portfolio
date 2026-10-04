@@ -1,126 +1,115 @@
 import { useEffect, useState } from "react";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight, Sparkles } from "lucide-react";
+import { portfolioData } from "../data/portfolioData";
+
 const NAV_LINKS = [
-  { label: "Work", href: "#work" },
   { label: "About", href: "#about" },
-  { label: "Notes", href: "#notes" },
+  { label: "Skills", href: "#skills" },
+  { label: "Projects", href: "#projects" },
+  { label: "Experience", href: "#experience" },
   { label: "Contact", href: "#contact" },
 ];
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("Work");
+  const [active, setActive] = useState("About");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <div className="w-full">
-      {/* Fonts */}
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
-        .font-display { font-family: 'Fraunces', ui-serif, serif; font-feature-settings: "ss01" 1; }
-        .font-body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
-        .font-meta { font-family: 'JetBrains Mono', ui-monospace, monospace; }
-
-        .ink-underline {
-          position: relative;
-        }
-        .ink-underline::after {
-          content: "";
-          position: absolute;
-          left: 0;
-          bottom: -6px;
-          height: 2px;
-          width: 100%;
-          background: #C98A2C;
-          border-radius: 2px;
-          transform: scaleX(0);
-          transform-origin: left;
-          transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
-        }
-        .ink-underline.is-active::after,
-        .ink-underline:hover::after {
-          transform: scaleX(1);
-        }
-      `}</style>
-
+    <header className="sticky top-0 z-50 w-full transition-all duration-300">
       <nav
-        className={`font-body sticky top-0 z-50 w-full border-b transition-all duration-300 ${
+        className={`w-full transition-all duration-300 ${
           scrolled
-            ? "bg-[#14191B]/95 backdrop-blur border-[#C98A2C]/20 shadow-[0_8px_24px_-16px_rgba(0,0,0,0.6)]"
-            : "bg-[#14191B] border-transparent"
+            ? "glass-nav py-3.5 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.8)]"
+            : "bg-transparent py-5"
         }`}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-10">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-12">
           {/* Logo mark */}
           <a
             href="#top"
             className="group flex items-center gap-3"
             aria-label="Home"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#EDE6D6]/25 bg-[#EDE6D6]/5 transition-colors duration-300 group-hover:border-[#C98A2C]/70">
-              <span className="font-display text-base italic text-[#EDE6D6]">
-                VK.
+            <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-rose-500/20 border border-white/10 transition-all duration-300 group-hover:scale-105 group-hover:border-cyan-400/50">
+              <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-400 text-base">
+                {portfolioData.personal.shortName || "VK"}
               </span>
-            </span>
-            <span className="font-display text-lg tracking-tight text-[#EDE6D6]">
-              Vishal Kumar
-            </span>
+            </div>
+
+            <div className="flex flex-col">
+              <span className="font-semibold text-gray-100 tracking-tight text-base group-hover:text-cyan-400 transition-colors">
+                {portfolioData.personal.name}
+              </span>
+              <span className="text-[10px] text-gray-400 font-mono tracking-wider uppercase">
+                Portfolio
+              </span>
+            </div>
           </a>
 
-          {/* Desktop links */}
-          <ul className="hidden items-center gap-9 md:flex">
-            {NAV_LINKS.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  onClick={() => setActive(link.label)}
-                  className={`ink-underline font-body text-[15px] font-medium text-[#EDE6D6]/80 transition-colors duration-200 hover:text-[#EDE6D6] ${
-                    active === link.label ? "is-active text-[#EDE6D6]" : ""
-                  }`}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
+          {/* Desktop navigation */}
+          <ul className="hidden items-center gap-1 rounded-full border border-white/10 bg-gray-900/60 p-1.5 backdrop-blur-md md:flex">
+            {NAV_LINKS.map((link) => {
+              const isActive = active === link.label;
+              return (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    onClick={() => setActive(link.label)}
+                    className={`relative rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 block ${
+                      isActive
+                        ? "text-cyan-300 font-semibold"
+                        : "text-gray-400 hover:text-gray-100"
+                    }`}
+                  >
+                    {isActive && (
+                      <span className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500/20 to-violet-500/20 border border-cyan-500/30 -z-10" />
+                    )}
+                    {link.label}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
 
-          {/* CTA */}
-          <a
-            href="#contact"
-            className="group hidden items-center gap-1.5 rounded-full border border-[#EDE6D6]/25 px-4 py-2 font-meta text-xs uppercase tracking-[0.15em] text-[#EDE6D6] transition-all duration-300 hover:border-[#C98A2C] hover:bg-[#C98A2C] hover:text-[#14191B] md:inline-flex"
-          >
-            Let&rsquo;s talk
-            <ArrowUpRight
-              size={14}
-              className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            />
-          </a>
+          {/* CTA button */}
+          <div className="hidden md:flex items-center gap-3">
+            <a
+              href="#contact"
+              className="relative inline-flex items-center gap-2 rounded-full p-[1px] font-mono text-xs uppercase tracking-wider font-semibold text-gray-200 transition-all duration-300 hover:scale-105"
+            >
+              <span className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 via-violet-500 to-rose-500 opacity-80 blur-[2px]" />
+              <span className="relative flex items-center gap-2 rounded-full bg-gray-950 px-5 py-2.5 transition-all duration-300 hover:bg-gray-900">
+                <span>Let's Talk</span>
+                <ArrowUpRight size={14} className="text-cyan-400" />
+              </span>
+            </a>
+          </div>
 
-          {/* Mobile toggle */}
+          {/* Mobile hamburger menu toggle */}
           <button
             onClick={() => setOpen((v) => !v)}
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-[#EDE6D6]/25 text-[#EDE6D6] md:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-gray-900/80 text-gray-300 backdrop-blur-md transition-colors hover:text-white md:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
           >
-            {open ? <X size={18} /> : <Menu size={18} />}
+            {open ? <X size={20} className="text-cyan-400" /> : <Menu size={20} />}
           </button>
         </div>
 
-        {/* Mobile panel */}
+        {/* Mobile menu drawer */}
         <div
-          className={`overflow-hidden border-t border-[#EDE6D6]/10 bg-[#14191B] transition-[max-height,opacity] duration-300 md:hidden ${
-            open ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+          className={`overflow-hidden border-b border-white/10 bg-gray-950/95 backdrop-blur-xl transition-all duration-300 md:hidden ${
+            open ? "max-h-96 opacity-100 py-4" : "max-h-0 opacity-0 py-0"
           }`}
         >
-          <ul className="flex flex-col gap-1 px-6 py-4">
+          <ul className="flex flex-col gap-2 px-6">
             {NAV_LINKS.map((link) => (
               <li key={link.label}>
                 <a
@@ -129,13 +118,14 @@ export default function Nav() {
                     setActive(link.label);
                     setOpen(false);
                   }}
-                  className={`font-body block rounded-lg px-3 py-2.5 text-[15px] font-medium transition-colors ${
+                  className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium transition-all ${
                     active === link.label
-                      ? "bg-[#EDE6D6]/8 text-[#EDE6D6]"
-                      : "text-[#EDE6D6]/70 hover:bg-[#EDE6D6]/5 hover:text-[#EDE6D6]"
+                      ? "bg-cyan-500/10 text-cyan-300 border border-cyan-500/30"
+                      : "text-gray-300 hover:bg-white/5 hover:text-white"
                   }`}
                 >
-                  {link.label}
+                  <span>{link.label}</span>
+                  {active === link.label && <Sparkles size={14} className="text-cyan-400" />}
                 </a>
               </li>
             ))}
@@ -143,15 +133,15 @@ export default function Nav() {
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="font-meta flex items-center justify-center gap-1.5 rounded-full border border-[#C98A2C] px-4 py-2.5 text-xs uppercase tracking-[0.15em] text-[#C98A2C]"
+                className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-violet-600 px-4 py-3 text-center text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-cyan-500/20"
               >
-                Let&rsquo;s talk
-                <ArrowUpRight size={14} />
+                <span>Let's Talk</span>
+                <ArrowUpRight size={16} />
               </a>
             </li>
           </ul>
         </div>
       </nav>
-    </div>
+    </header>
   );
 }

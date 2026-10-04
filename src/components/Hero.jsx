@@ -1,15 +1,44 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowDownRight, Sparkles } from "lucide-react";
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa6";
+import { portfolioData } from "../data/portfolioData";
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [titleIndex, setTitleIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [imageError, setImageError] = useState(false);
   const frameRef = useRef(null);
 
+  const titles = portfolioData.personal.titles;
+
+  // Typing effect loop
   useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 60);
-    return () => clearTimeout(t);
-  }, []);
+    setMounted(true);
+    let timer;
+    const currentFullText = titles[titleIndex % titles.length];
+
+    if (isDeleting) {
+      timer = setTimeout(() => {
+        setDisplayText((prev) => prev.substring(0, prev.length - 1));
+      }, 40);
+    } else {
+      timer = setTimeout(() => {
+        setDisplayText((prev) => currentFullText.substring(0, prev.length + 1));
+      }, 70);
+    }
+
+    if (!isDeleting && displayText === currentFullText) {
+      timer = setTimeout(() => setIsDeleting(true), 2000);
+    } else if (isDeleting && displayText === "") {
+      setIsDeleting(false);
+      setTitleIndex((prev) => (prev + 1) % titles.length);
+    }
+
+    return () => clearTimeout(timer);
+  }, [displayText, isDeleting, titleIndex, titles]);
 
   const handleMouseMove = (e) => {
     const el = frameRef.current;
@@ -23,170 +52,188 @@ export default function Hero() {
   const resetTilt = () => setTilt({ x: 0, y: 0 });
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#14191B]">
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
-        .font-display { font-family: 'Fraunces', ui-serif, serif; }
-        .font-body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
-        .font-meta { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    <section id="top" className="relative min-h-[90vh] w-full overflow-hidden bg-[#0b0f17] pt-12 pb-20 flex flex-col justify-center">
+      {/* Background Floating Orbs */}
+      <div className="pointer-events-none absolute -top-20 -left-20 h-96 w-96 rounded-full bg-cyan-500/15 blur-[120px] animate-float" />
+      <div className="pointer-events-none absolute top-1/3 -right-20 h-96 w-96 rounded-full bg-purple-600/15 blur-[140px] animate-float-reverse" />
 
-        @keyframes rise-in {
-          from { opacity: 0; transform: translateY(18px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        .rise {
-          opacity: 0;
-          animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
-
-        @keyframes drift {
-          0%   { transform: translate(0, 0) scale(1); }
-          33%  { transform: translate(14px, -18px) scale(1.04); }
-          66%  { transform: translate(-10px, 12px) scale(0.98); }
-          100% { transform: translate(0, 0) scale(1); }
-        }
-        .ink-blob {
-          animation: drift 14s ease-in-out infinite;
-        }
-
-        @keyframes blink {
-          0%, 45% { opacity: 1; }
-          50%, 95% { opacity: 0; }
-          100% { opacity: 1; }
-        }
-        .cursor {
-          animation: blink 1.1s step-end infinite;
-        }
-
-        .photo-frame {
-          transition: transform 0.15s ease-out;
-          will-change: transform;
-        }
-      `}</style>
-
-      {/* faint grid texture, purely atmospheric */}
+      {/* Grid Overlay */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        className="pointer-events-none absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage:
-            "linear-gradient(#EDE6D6 1px, transparent 1px), linear-gradient(90deg, #EDE6D6 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
+            "linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
         }}
       />
 
-      <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-16 px-6 py-24 md:grid-cols-[1.1fr_0.9fr] md:px-10 md:py-32">
-        {/* Left: text */}
-        <div>
-          <div
-            className={`mb-6 inline-flex items-center gap-2 rounded-full border border-[#EDE6D6]/15 bg-[#EDE6D6]/5 px-3 py-1.5 ${
-              mounted ? "rise" : "opacity-0"
-            }`}
-            style={{ animationDelay: "0.05s" }}
-          >
-            <Sparkles size={13} className="text-[#C98A2C]" />
-            <span className="font-meta text-[11px] uppercase tracking-[0.2em] text-[#EDE6D6]/70">
-              Open to new opportunities
-            </span>
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-12 z-10">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+          
+          {/* Left Column: Hero Text */}
+          <div className="lg:col-span-7 flex flex-col items-start text-left">
+            {/* Status Badge */}
+            <div
+              className={`mb-6 inline-flex items-center gap-2.5 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 backdrop-blur-md transition-all duration-700 ${
+                mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+            >
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              </span>
+              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-cyan-300">
+                {portfolioData.personal.statusBadge}
+              </span>
+              <Sparkles size={13} className="text-cyan-400 ml-1" />
+            </div>
+
+            {/* Main Greeting */}
+            <h1
+              className={`text-4xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl leading-[1.1] transition-all duration-700 delay-100 ${
+                mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+            >
+              Hi, I'm{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-violet-400 to-rose-400">
+                {portfolioData.personal.name}
+              </span>
+            </h1>
+
+            {/* Dynamic Typing Title */}
+            <div
+              className={`mt-4 flex items-center gap-2 text-xl sm:text-3xl font-semibold text-gray-300 h-10 transition-all duration-700 delay-200 ${
+                mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+            >
+              <span className="text-cyan-400 font-mono">&gt;</span>
+              <span className="text-gray-200">{displayText}</span>
+              <span className="animate-pulse text-cyan-400 font-mono">|</span>
+            </div>
+
+            {/* Short Bio */}
+            <p
+              className={`mt-6 max-w-2xl text-base sm:text-lg text-gray-400 leading-relaxed transition-all duration-700 delay-300 ${
+                mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+            >
+              {portfolioData.personal.bio}
+            </p>
+
+            {/* Action Buttons */}
+            <div
+              className={`mt-8 flex flex-wrap items-center gap-4 transition-all duration-700 delay-400 ${
+                mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+            >
+              <a
+                href="#projects"
+                className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-gradient-to-r from-cyan-500 to-violet-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-cyan-500/25 transition-all duration-300 hover:scale-105 hover:shadow-cyan-500/40"
+              >
+                <span>View Projects</span>
+                <ArrowDownRight
+                  size={18}
+                  className="transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1"
+                />
+              </a>
+
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-semibold text-gray-200 backdrop-blur-md transition-all duration-300 hover:border-cyan-400/40 hover:bg-white/10 hover:text-cyan-300"
+              >
+                <span>Get In Touch</span>
+              </a>
+            </div>
+
+            {/* Social Links */}
+            <div
+              className={`mt-10 flex items-center gap-5 transition-all duration-700 delay-500 ${
+                mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+            >
+              <span className="text-xs font-mono uppercase tracking-wider text-gray-500">Connect:</span>
+              <a
+                href={portfolioData.personal.github}
+                target="_blank"
+                rel="noreferrer"
+                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-gray-900/60 text-gray-400 backdrop-blur-md transition-all duration-300 hover:border-cyan-400/50 hover:text-cyan-400 hover:scale-110"
+                aria-label="GitHub"
+              >
+                <FaGithub size={18} />
+              </a>
+              <a
+                href={portfolioData.personal.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-gray-900/60 text-gray-400 backdrop-blur-md transition-all duration-300 hover:border-cyan-400/50 hover:text-cyan-400 hover:scale-110"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin size={18} />
+              </a>
+              <a
+                href={`mailto:${portfolioData.personal.email}`}
+                className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-gray-900/60 text-gray-400 backdrop-blur-md transition-all duration-300 hover:border-cyan-400/50 hover:text-cyan-400 hover:scale-110"
+                aria-label="Email"
+              >
+                <FaEnvelope size={18} />
+              </a>
+            </div>
           </div>
 
-          <h1
-            className={`font-display text-5xl leading-[1.05] text-[#EDE6D6] md:text-7xl ${
-              mounted ? "rise" : "opacity-0"
-            }`}
-            style={{ animationDelay: "0.15s" }}
-          >
-            Hi, I&rsquo;m{" "}
-            <span className="italic text-[#C98A2C]">Vishal Kumar</span>
-          </h1>
-
-          <p
-            className={`font-body mt-5 flex items-center text-xl text-[#EDE6D6]/70 md:text-2xl ${
-              mounted ? "rise" : "opacity-0"
-            }`}
-            style={{ animationDelay: "0.28s" }}
-          >
-            Full-Stack Developer
-            <span className="mx-3 text-[#7C9885]">&middot;</span>
-            Problem Solver
-            <span/>
-          </p>
-
-          <p
-            className={`font-body mt-6 max-w-md text-[15px] leading-relaxed text-[#EDE6D6]/50 ${
-              mounted ? "rise" : "opacity-0"
-            }`}
-            style={{ animationDelay: "0.4s" }}
-          >
-            I design and build products end-to-end — from database schema to
-            perfect interfaces — with a focus on clarity, speed, and
-            craft.
-          </p>
-
+          {/* Right Column: Full-Frame Photo Card */}
           <div
-            className={`mt-9 flex flex-wrap items-center gap-4 ${
-              mounted ? "rise" : "opacity-0"
+            className={`lg:col-span-5 relative flex justify-center transition-all duration-700 delay-300 ${
+              mounted ? "opacity-100 scale-100" : "opacity-0 scale-95"
             }`}
-            style={{ animationDelay: "0.52s" }}
           >
-            <a
-              href="#work"
-              className="group inline-flex items-center gap-2 rounded-full bg-[#C98A2C] px-6 py-3 font-meta text-xs uppercase tracking-[0.15em] text-[#14191B] transition-transform duration-300 hover:-translate-y-0.5"
+            {/* Glowing Backdrop Glow */}
+            <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-cyan-500/25 via-violet-600/25 to-rose-500/25 blur-2xl opacity-75" />
+
+            <div
+              ref={frameRef}
+              onMouseMove={handleMouseMove}
+              onMouseLeave={resetTilt}
+              className="glass-card glass-card-hover relative aspect-[4/5] w-full max-w-md overflow-hidden rounded-3xl p-2.5 shadow-2xl transition-transform duration-200 ease-out border border-white/15"
+              style={{
+                transform: `perspective(1000px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
+              }}
             >
-              See my work
-              <ArrowDownRight
-                size={15}
-                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5"
-              />
-            </a>
-            <a
-              href="#contact"
-              className="font-meta rounded-full border border-[#EDE6D6]/25 px-6 py-3 text-xs uppercase tracking-[0.15em] text-[#EDE6D6] transition-colors duration-300 hover:border-[#EDE6D6]/60"
-            >
-              Get in touch
-            </a>
+              <div className="relative h-full w-full overflow-hidden rounded-2xl bg-gray-950 border border-white/10 shadow-inner">
+                {!imageError && portfolioData.personal.avatarUrl ? (
+                  <img
+                    src={portfolioData.personal.avatarUrl}
+                    alt={portfolioData.personal.name}
+                    onError={() => setImageError(true)}
+                    className="h-full w-full object-cover object-center transition-transform duration-500 hover:scale-105"
+                  />
+                ) : (
+                  <div className="flex h-full w-full flex-col items-center justify-center gap-3">
+                    <span className="font-extrabold text-5xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-400">
+                      {portfolioData.personal.shortName || "VK"}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
+
         </div>
 
-        {/* Right: photo */}
-        <div
-          className={`relative mx-auto w-full max-w-sm ${
-            mounted ? "rise" : "opacity-0"
-          }`}
-          style={{ animationDelay: "0.25s" }}
-        >
-          {/* drifting ink blob backdrop */}
-          <div
-            className="ink-blob absolute -inset-6 -z-10 rounded-[40%_60%_55%_45%/45%_40%_60%_55%] bg-[#C98A2C]/20 blur-2xl"
-            aria-hidden="true"
-          />
-          <div
-            className="ink-blob absolute -inset-10 -z-10 rounded-full bg-[#7C9885]/10 blur-3xl"
-            style={{ animationDelay: "-6s" }}
-            aria-hidden="true"
-          />
-
-          <div
-            ref={frameRef}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={resetTilt}
-            className="photo-frame relative aspect-[4/5] w-full overflow-hidden rounded-[28px] border border-[#EDE6D6]/15 bg-[#EDE6D6]/5 shadow-[0_30px_60px_-25px_rgba(0,0,0,0.6)]"
-            style={{
-              transform: `perspective(800px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
-            }}
-          >
-            {/* Placeholder — replace with your real photo */}
-            <div className="photo-placeholder flex h-full w-full flex-col items-center justify-center gap-3 bg-gradient-to-br from-[#EDE6D6]/10 to-transparent">
-              <span className="font-display text-6xl italic text-[#EDE6D6]/30">
-                VK
-              </span>
-              <span className="font-meta text-[10px] uppercase tracking-[0.2em] text-[#EDE6D6]/30">
-                swap with your-photo.jpg
-              </span>
+        {/* Quick Stats Bar */}
+        <div className="mt-20 grid grid-cols-2 gap-4 sm:grid-cols-4 lg:gap-6">
+          {portfolioData.stats.map((stat, idx) => (
+            <div
+              key={idx}
+              className="glass-card glass-card-hover rounded-2xl p-5 text-center"
+            >
+              <div className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-400">
+                {stat.value}
+              </div>
+              <div className="mt-1 text-xs font-mono uppercase tracking-wider text-gray-400">
+                {stat.label}
+              </div>
             </div>
-            {/* <img src="/your-photo.jpg" alt="Aanya Rao" className="h-full w-full object-cover" /> */}
-          </div>
-
-        
+          ))}
         </div>
       </div>
     </section>
