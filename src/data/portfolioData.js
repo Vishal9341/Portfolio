@@ -77,15 +77,15 @@ export const portfolioData = {
   projects: [
     {
       id: 1,
-      title: "Dev Genius Workspace",
+      title: "Local Worker Service Platform",
       category: "Full-Stack",
-      description: "A modern full-stack workspace application combining developer notes, task management, and interactive data dashboard with dark glassmorphism UI.",
-      tags: ["React", "Node.js", "Express", "Tailwind CSS"],
+      description: "Full-stack local service platform for seamless worker booking, built with modern web technologies and designed for real-world usability.",
+      tags: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
       featured: true,
       accent: "cyan",
-      image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
-      liveUrl: "https://github.com/Vishal9341",
-      githubUrl: "https://github.com/Vishal9341"
+      image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80",
+      liveUrl: "https://local-worker-service-platform.vercel.app/",
+      githubUrl: "https://github.com/Vishal9341/Local-Worker-Service-Platform"
     },
     {
       id: 2,
