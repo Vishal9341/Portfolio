@@ -102,15 +102,15 @@ export const portfolioData = {
     },
     {
       id: 3,
-      title: "Nexus E-Commerce Suite",
-      category: "Full-Stack",
-      description: "Modern full-stack e-commerce web app featuring product catalog, dynamic filtering, cart persistence, and order tracking.",
-      tags: ["React", "Node.js", "Tailwind CSS", "Stripe"],
+      title: "ShaadiNagar Tent House & Event Management",
+      category: "Frontend / Web App",
+      description: "A responsive event management website for ShaadiNagar, a Tent House & Event Management company, built with React and Tailwind CSS. Features service showcases, categorized galleries, inquiry forms, and Google Maps integration.",
+      tags: ["React", "Tailwind CSS", "JavaScript", "Google Maps API"],
       featured: true,
       accent: "rose",
-      image: "https://images.unsplash.com/photo-1556742049-0a67daf40955?auto=format&fit=crop&w=800&q=80",
-      liveUrl: "https://github.com/Vishal9341",
-      githubUrl: "https://github.com/Vishal9341"
+      image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80",
+      liveUrl: "https://shaadi-nagar-tent-house-event-manag.vercel.app/",
+      githubUrl: "https://github.com/Vishal9341/ShaadiNagar-Tent-House-Event-Management"
     }
   ],
   experience: [
