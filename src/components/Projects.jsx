@@ -1,4 +1,4 @@
-import { FolderGit2, ExternalLink, Sparkles } from "lucide-react";
+import { FolderGit2, ExternalLink, Sparkles, Clock } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
 import { portfolioData } from "../data/portfolioData";
 
@@ -61,11 +61,17 @@ export default function Projects() {
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/40 to-transparent opacity-80" />
 
                 {/* Top Badge Overlay */}
-                <div className="absolute top-4 left-4 flex items-center gap-2">
+                <div className="absolute top-4 left-4 flex items-center gap-2 flex-wrap">
                   <span className="rounded-full border border-white/20 bg-gray-950/70 px-3 py-1 font-mono text-[11px] font-medium text-cyan-300 backdrop-blur-md">
                     {project.category}
                   </span>
-                  {project.featured && (
+                  {project.inProgress && (
+                    <span className="flex items-center gap-1.5 rounded-full border border-amber-500/40 bg-amber-950/80 px-3 py-1 font-mono text-[11px] font-medium text-amber-300 backdrop-blur-md">
+                      <Clock size={11} className="animate-spin" />
+                      In Progress
+                    </span>
+                  )}
+                  {project.featured && !project.inProgress && (
                     <span className="flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-500 to-rose-500 px-3 py-1 font-mono text-[11px] font-bold text-gray-950 shadow-md">
                       <Sparkles size={11} />
                       Featured
@@ -109,15 +115,22 @@ export default function Projects() {
                     <span>Source Code</span>
                   </a>
 
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="group/btn inline-flex items-center gap-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 px-4 py-2 font-mono text-xs uppercase tracking-wider font-semibold text-cyan-300 transition-all hover:bg-cyan-500 hover:text-gray-950 hover:border-cyan-400 shadow-md hover:shadow-cyan-500/30"
-                  >
-                    <span>Live Demo</span>
-                    <ExternalLink size={14} className="transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                  </a>
+                  {project.inProgress ? (
+                    <span className="inline-flex items-center gap-2 rounded-xl bg-amber-500/10 border border-amber-500/30 px-4 py-2 font-mono text-xs uppercase tracking-wider font-semibold text-amber-300">
+                      <Clock size={14} className="animate-pulse" />
+                      <span>In Progress</span>
+                    </span>
+                  ) : (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group/btn inline-flex items-center gap-2 rounded-xl bg-cyan-500/10 border border-cyan-500/30 px-4 py-2 font-mono text-xs uppercase tracking-wider font-semibold text-cyan-300 transition-all hover:bg-cyan-500 hover:text-gray-950 hover:border-cyan-400 shadow-md hover:shadow-cyan-500/30"
+                    >
+                      <span>Live Demo</span>
+                      <ExternalLink size={14} className="transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

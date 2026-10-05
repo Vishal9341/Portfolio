@@ -89,15 +89,16 @@ export const portfolioData = {
     },
     {
       id: 2,
-      title: "Smart Content Dashboard",
-      category: "Full-Stack",
-      description: "Full-stack application for content creation, template management, and automated workflow analytics powered by REST microservices.",
-      tags: ["React", "Express", "MongoDB", "Tailwind"],
+      title: "Codebase Onboarder",
+      category: "AI / Developer Tools",
+      description: "AI-powered developer tool that analyzes codebases, explains project structure, detects technologies, identifies important files, and helps developers understand unfamiliar repositories faster.",
+      tags: ["React", "Node.js", "AI / LLM", "Tailwind CSS"],
       featured: true,
+      inProgress: true,
       accent: "violet",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
-      liveUrl: "https://github.com/Vishal9341",
-      githubUrl: "https://github.com/Vishal9341"
+      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+      liveUrl: "#",
+      githubUrl: "https://github.com/Vishal9341/Codebase-Onboarder"
     },
     {
       id: 3,
