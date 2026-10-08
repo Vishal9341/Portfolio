@@ -55,17 +55,10 @@ export default function About() {
               </div>
             </div>
 
-            <div className="glass-card glass-card-hover rounded-2xl p-6 flex items-start gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400">
                 <Award size={24} />
               </div>
-              <div>
-                <h3 className="text-lg font-bold text-white">Production Velocity</h3>
-                <p className="mt-1 text-xs text-gray-400 leading-relaxed">
-                  Translating complex client requirements into clean, testable, production-ready code fast.
-                </p>
-              </div>
-            </div>
+      
           </div>
 
           {/* Right: Paragraphs */}
@@ -82,10 +75,10 @@ export default function About() {
 
             {/* Quick Checklist */}
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 border-t border-white/10 pt-6">
-              <div className="flex items-center gap-2 text-xs font-mono text-cyan-300">
+              {/* <div className="flex items-center gap-2 text-xs font-mono text-cyan-300">
                 <CheckCircle2 size={16} className="text-cyan-400" />
                 <span>Responsive & Mobile-First</span>
-              </div>
+              </div> */}
               <div className="flex items-center gap-2 text-xs font-mono text-violet-300">
                 <CheckCircle2 size={16} className="text-violet-400" />
                 <span>Clean & Maintainable Code</span>
@@ -94,10 +87,10 @@ export default function About() {
                 <CheckCircle2 size={16} className="text-rose-400" />
                 <span>Performance & SEO Optimized</span>
               </div>
-              <div className="flex items-center gap-2 text-xs font-mono text-emerald-300">
+              {/* <div className="flex items-center gap-2 text-xs font-mono text-emerald-300">
                 <CheckCircle2 size={16} className="text-emerald-400" />
                 <span>Modern Glass & Gradient UI</span>
-              </div>
+              </div> */}
             </div>
 
             {/* Action Buttons */}

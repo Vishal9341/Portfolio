@@ -4,12 +4,10 @@ export const portfolioData = {
     shortName: "VK",
     titles: [
       "Full-Stack Engineer",
-      "React & Node.js Developer",
       "AI Web App Developer",
       "Software Engineer"
     ],
-    statusBadge: "Available for Full-Stack & AI Roles",
-    bio: "I build modern, high-performance web applications — combining clean frontend engineering, robust backend microservices, and cutting-edge AI integrations.",
+    bio: "I build modern, high-performance web applications — combining clean frontend engineering,  backend microservices, and cutting-edge AI integrations.",
     aboutParagraphs: [
       "Hello! I'm Vishal, a dedicated Full-Stack Engineer focused on building modern, high-performance web applications with seamless AI integrations.",
       "With expertise across React, Node.js, and GenAI tools, I design intuitive web apps that turn complex requirements into effortless user experiences.",
@@ -20,12 +18,12 @@ export const portfolioData = {
     github: "https://github.com/Vishal9341",
     linkedin: "https://www.linkedin.com/in/vishal-kumar9341/",
     avatarUrl: "/profile.jpg",
-    resumeUrl: "#"
+    resumeUrl: "/V_Resume.pdf"
   },
   stats: [
     { label: "Role Focus", value: "Full-Stack" },
-    { label: "Experience", value: "3+ Yrs" },
-    { label: "Projects Completed", value: "15+" },
+    { label: "Experience", value: "Fresher" },
+    { label: "Projects Completed", value: "5+" },
     { label: "Tech Stack", value: "12+" }
   ],
   skillsCategories: [
@@ -40,7 +38,6 @@ export const portfolioData = {
         "HTML5 / CSS3",
         "JavaScript (ES6+)",
         "TypeScript",
-        "Next.js",
         "Responsive UI/UX"
       ]
     },
