@@ -26,10 +26,7 @@ export default function About() {
           </p>
         </div>
 
-        {/* Section Content */}
         <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-12 items-center">
-          
-          {/* Left: Highlight Cards */}
           <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
             <div className="glass-card glass-card-hover rounded-2xl p-6 flex items-start gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">

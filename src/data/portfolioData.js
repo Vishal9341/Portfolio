@@ -113,11 +113,11 @@ export const portfolioData = {
   experience: [
     {
       id: 1,
-      role: "Full-Stack Engineer",
-      company: "Independent & Open Source",
-      period: "2024 - Present",
+      role: "Frontend Engineer",
+      company: "CR IT Solution and Private LTD.",
+      period: "May-July 2026",
       description: "Designing full-stack web applications, architecting Express & React REST APIs, and building modern design systems.",
-      skills: ["React", "Node.js", "Express", "Tailwind CSS"]
+      skills: ["React", "Tailwind CSS","UI/UX Design"]
     }
   ]
 };
