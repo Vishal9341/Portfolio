@@ -113,10 +113,10 @@ export const portfolioData = {
   experience: [
     {
       id: 1,
-      role: "Frontend Engineer",
-      company: "CR IT Solution and Private LTD.",
+      role: "Frontend Developer",
+      company: "CR IT Solutions and Services Pvt.Ltd.",
       period: "May-July 2026",
-      description: "Designing full-stack web applications, architecting Express & React REST APIs, and building modern design systems.",
+      description: "Built and enhanced the About and Contact pages of an event management website, focusing on responsive layouts, intuitive navigation, and user-friendly design across multiple screen sizes. ",
       skills: ["React", "Tailwind CSS","UI/UX Design"]
     }
   ]
