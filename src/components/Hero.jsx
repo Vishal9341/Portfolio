@@ -13,8 +13,6 @@ export default function Hero() {
   const frameRef = useRef(null);
 
   const titles = portfolioData.personal.titles;
-
-  // Typing effect loop
   useEffect(() => {
     setMounted(true);
     let timer;
@@ -56,8 +54,6 @@ export default function Hero() {
       {/* Background Floating Orbs */}
       <div className="pointer-events-none absolute -top-20 -left-20 h-96 w-96 rounded-full bg-cyan-500/15 blur-[120px] animate-float" />
       <div className="pointer-events-none absolute top-1/3 -right-20 h-96 w-96 rounded-full bg-purple-600/15 blur-[140px] animate-float-reverse" />
-
-      {/* Grid Overlay */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.04]"
         style={{
@@ -72,23 +68,15 @@ export default function Hero() {
           
           {/* Left Column: Hero Text */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
-            {/* Status Badge */}
             <div
               className={`mb-6 inline-flex items-center gap-2.5 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 backdrop-blur-md transition-all duration-700 ${
                 mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-              </span>
               <span className="font-mono text-xs font-semibold uppercase tracking-wider text-cyan-300">
                 {portfolioData.personal.statusBadge}
               </span>
-              <Sparkles size={13} className="text-cyan-400 ml-1" />
             </div>
-
-            {/* Main Greeting */}
             <h1
               className={`text-4xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl leading-[1.1] transition-all duration-700 delay-100 ${
                 mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"

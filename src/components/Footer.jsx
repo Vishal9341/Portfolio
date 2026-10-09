@@ -16,14 +16,12 @@ export default function Footer() {
         <div className="flex flex-col items-center sm:items-start gap-1">
           <div className="flex items-center gap-2 text-sm font-semibold text-white">
             <span>{portfolioData.personal.name}</span>
-            <span className="text-cyan-400 font-mono text-xs">• Portfolio</span>
           </div>
           <p className="text-xs text-gray-500">
-            © {new Date().getFullYear()} All rights reserved. Crafted with Tailwind CSS & React.
+            © {new Date().getFullYear()} All rights reserved.
           </p>
         </div>
 
-        {/* Center Socials */}
         <div className="flex items-center gap-4">
           <a
             href={portfolioData.personal.github}

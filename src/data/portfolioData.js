@@ -4,7 +4,7 @@ export const portfolioData = {
     shortName: "VK",
     titles: [
       "Full-Stack Engineer",
-      "AI Web App Developer",
+      "AI Web Developer",
       "Software Engineer"
     ],
     bio: "I build modern, high-performance web applications — combining clean frontend engineering,  backend microservices, and cutting-edge AI integrations.",
@@ -37,7 +37,6 @@ export const portfolioData = {
         "Tailwind CSS",
         "HTML5 / CSS3",
         "JavaScript (ES6+)",
-        "TypeScript",
         "Responsive UI/UX"
       ]
     },
@@ -87,9 +86,9 @@ export const portfolioData = {
     {
       id: 2,
       title: "Codebase Onboarder",
-      category: "AI / Developer Tools",
+      category: "AI / Full Stack",
       description: "AI-powered developer tool that analyzes codebases, explains project structure, detects technologies, identifies important files, and helps developers understand unfamiliar repositories faster.",
-      tags: ["React", "Node.js", "AI / LLM", "Tailwind CSS"],
+      tags: ["React", "Node.js", "AI / LLM", "Tailwind CSS","Express.js"],
       featured: true,
       inProgress: true,
       accent: "violet",
@@ -100,7 +99,7 @@ export const portfolioData = {
     {
       id: 3,
       title: "ShaadiNagar Tent House & Event Management",
-      category: "Frontend / Web App",
+      category: "Frontend",
       description: "A responsive event management website for ShaadiNagar, a Tent House & Event Management company, built with React and Tailwind CSS. Features service showcases, categorized galleries, inquiry forms, and Google Maps integration.",
       tags: ["React", "Tailwind CSS", "JavaScript", "Google Maps API"],
       featured: true,

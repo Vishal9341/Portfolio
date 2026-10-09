@@ -108,13 +108,11 @@ export default function Contact() {
                   </span>
                 </div>
                 <p className="mt-2 text-xs text-gray-400 leading-relaxed">
-                  Open for full-time roles, freelance projects, and technical consultations.
+                  Open for full-time roles, Full Stack and SDE.
                 </p>
               </div>
             </div>
           </div>
-
-          {/* Right: Glassmorphism Interactive Form */}
           <div className="lg:col-span-7 glass-card rounded-3xl p-8 sm:p-10 relative overflow-hidden">
             {submitted ? (
               <div className="flex flex-col items-center justify-center py-16 text-center">
@@ -138,7 +136,7 @@ export default function Contact() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="John Doe"
+                      placeholder=""
                       className="w-full rounded-xl border border-white/10 bg-gray-950/80 px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400 transition-all"
                     />
                   </div>
@@ -152,7 +150,7 @@ export default function Contact() {
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="john@example.com"
+                      placeholder="@example.com"
                       className="w-full rounded-xl border border-white/10 bg-gray-950/80 px-4 py-3 text-sm text-white placeholder-gray-500 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400 transition-all"
                     />
                   </div>
