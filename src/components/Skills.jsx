@@ -108,11 +108,11 @@ export default function Skills() {
                   </div>
                 </div>
 
-                {/* Bottom Card Footer */}
+                {/* Bottom Card Footer
                 <div className="mt-8 pt-4 border-t border-white/5 flex items-center justify-between font-mono text-[11px] text-gray-500">
                   <span>{cat.skills.length} Technologies</span>
                   <span className="text-cyan-400">Full-Stack Core</span>
-                </div>
+                </div> */}
               </div>
             );
           })}

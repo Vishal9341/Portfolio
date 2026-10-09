@@ -76,7 +76,7 @@ export default function About() {
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <a
                 href={portfolioData.personal.resumeUrl}
-                download
+                download="V_Resume.pdf"
                 className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-violet-600 px-6 py-3 text-xs font-mono uppercase tracking-wider font-semibold text-white shadow-lg shadow-cyan-500/20 transition-all hover:scale-105"
               >
                 <FileText size={16} />
